@@ -1,2 +1,2 @@
 ### Lucas Weber ###
-<p>Desenvolvedor de Software</p>
+<p>Desenvolvedor de Software. Estudante de Ciência da Computação.</p>
