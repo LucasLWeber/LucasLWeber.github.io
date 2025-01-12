@@ -1,8 +1,12 @@
 export default class ScrollSuave {
     constructor(links, options) {
         this.linksInternos = document.querySelectorAll(links);
-        (options === undefined) ? this.options = { behavior: 'smooth', block: 'start' }: this.options = options;
-
+        this.offset = options?.offset || 0; 
+        this.options = {
+            behavior: 'smooth',
+            block: 'start',
+            ...options, 
+        };
         this.scrollToSection = this.scrollToSection.bind(this);
     }
 
@@ -10,7 +14,14 @@ export default class ScrollSuave {
         event.preventDefault();
         const href = event.currentTarget.getAttribute('href');
         const section = document.querySelector(href);
-        section.scrollIntoView(this.options);
+        
+        if (section) {
+            const topPosition = section.getBoundingClientRect().top + window.scrollY - this.offset;
+            window.scrollTo({
+                top: topPosition,
+                behavior: this.options.behavior,
+            });
+        }
     }
 
     addLinkEvent() {
